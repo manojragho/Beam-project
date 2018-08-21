@@ -14,14 +14,15 @@ trends_list=json.loads(json.dumps(india_trending,indent=1))
 b=[]
 for trend in trends_list[0]["trends"]:
      a = ((trend["name"]).encode('UTF-8').strip('#'))
-     b.append(a.decode('UTF-8')) 
+     b.append(a.decode('UTF-8'))
 print(b)
 
-a_Listen = Listen("celebs-1.txt")
+a_Listen = Listen("celebstweets.txt")
 authenticate = OAuthHandler(Credentials.Consumer_Key, Credentials.Consumer_Secret)
 authenticate.set_access_token(Credentials.Access_Token, Credentials.Access_Token_Secret)
 streamer = Stream(authenticate, a_Listen)
 tweets = streamer.filter(track=b)
+
 
 
 
