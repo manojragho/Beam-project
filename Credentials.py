@@ -1,9 +1,9 @@
 # These are main access code for interaction with twitter. These info. are confidential.
 
-Access_Token = "747099887855009793-uMSGwE1f7rbodWNuJUBgHyERHYyWzVl"
-Access_Token_Secret = "Gwzv6kQANKuEwqzncGdXzU4Xw6AMNi9ih8FCQfkZPxraD"
-Consumer_Key = "W3VIg1KRNgnXO98ufnJNwK5YS"
-Consumer_Secret = "6OMEiVLBmreaRk5C4vEAPm2M33sMdSiALKtXtg7CUMzlL0LjOf"
+Access_Token = "477903702-OtlqRUKyWp3Z0QgxYpkxaArMRgIx1iSYYwASC1iR"
+Access_Token_Secret = "O464wEfjHYrJqOldSFtHxpS3Tpy6o6WBDUkhSggnbBiO2"
+Consumer_Key = "KUSKKjY0YzFrnb7r1DF4XCz1D"
+Consumer_Secret = "0vmgas1M5eHiSuys3xijP5oT0Bx3o7Jn0aT4DK7egGziHgU1vZ"
 
 
 # this is credentials info.

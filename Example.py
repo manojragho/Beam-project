@@ -20,17 +20,16 @@ def run():
    ]
 
    p = beam.Pipeline(argv=argv)
-   input = 'celebs-1.txt' #.format(BUCKET)
-   output_prefix = 'new.txt'#.format(BUCKET)
+   input = 'tweetsfile.csv' #.format(BUCKET)
+   output_prefix = 'new.csv'#.format(BUCKET)
    searchTerm = '#'
 
 
    (p
       | 'Read_file' >> beam.io.ReadFromText(input)
-      | 'Search_#' >> beam.FlatMap(lambda line: my_search(line, searchTerm) )
       | 'find_words' >> beam.FlatMap(lambda x: re.findall(r'[A-Za-z\']+', x))
       | beam.combiners.Count.PerElement()
-      | beam.Map(lambda word_count: '%s: %s' % (word_count[0], word_count[1]))
+      | beam.Map(lambda word_count: '%s  %s' % (word_count[0], word_count[1]))
       | 'write' >> beam.io.WriteToText(output_prefix)
    )
 
