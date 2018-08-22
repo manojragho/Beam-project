@@ -10,8 +10,11 @@ import big_query_count_file as tweetcount
 
 def main():
     ww.get_trending()
+    print('trending topics generated')
     ww.get_tweets()
+    print('tweets based on trending topics are generated')
     eg.run()
+    print('Apache beam pipeline working and counting tweets words')
     trends.upload_trending()
     tweets.upload_tweets()
     tweetcount.upload_wordcount()

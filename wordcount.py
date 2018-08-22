@@ -21,10 +21,10 @@ def get_trending():
           b.append(a)
      print(b)
      with open('trending.csv', 'w') as csvfile:
-          spamwriter = csv.writer(csvfile, delimiter=' ', lineterminator='\n')
+          writer = csv.writer(csvfile, delimiter=' ', lineterminator='\n')
 
           for word in b:
-               spamwriter.writerow([word])
+               writer.writerow([word])
 
 
 
@@ -33,25 +33,32 @@ def get_trending():
 def get_tweets():
      b=[]
      with open('trending.csv','r') as  csvfile:
-          spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-          for row in spamreader:
+          reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+          for row in reader:
                b.append(''.join(row))
-     count=0;
+     count=0
+     a_Listen = Listen("tweets.csv", "")
+     authenticate = OAuthHandler(Credentials.Consumer_Key, Credentials.Consumer_Secret)
+     authenticate.set_access_token(Credentials.Access_Token, Credentials.Access_Token_Secret)
+     streamer = Stream(authenticate, a_Listen)
+     tweets = streamer.filter(track=b, languages=["en"])
+'''
      for word in b:
-          a_Listen = Listen("tweets.csv", word)
+          a_Listen = Listen("tweets.csv", "")
           authenticate = OAuthHandler(Credentials.Consumer_Key, Credentials.Consumer_Secret)
           authenticate.set_access_token(Credentials.Access_Token, Credentials.Access_Token_Secret)
-          api = tweepy.API(authenticate,timeout=1)
-
           streamer = Stream(authenticate, a_Listen)
+          print('searching for '+word)
           tweets = streamer.filter(track=[word], languages=["en"])
           count=count+1
           if count > 10:
                break
+               '''
 
 
 
-     print('done')
+
+
 
 
 

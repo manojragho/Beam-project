@@ -32,4 +32,5 @@ def upload_wordcount():
     with open('new.csv-00000-of-00001', 'rb') as readable:
         big_query_client.load_table_from_file(
             readable, table_ref, job_config=load_config)
+    print('Count file uploaded to big query')
 

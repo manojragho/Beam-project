@@ -33,5 +33,6 @@ def upload_tweets():
     with open('tweets.csv', 'rb') as readable:
         big_query_client.load_table_from_file(
             readable, table_ref, job_config=load_config)
+    print('tweets file uploaded to big query')
 
 

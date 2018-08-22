@@ -5,6 +5,7 @@ from tweepy import Stream
 from tweepy import API
 import csv
 import string
+import time
 
 
 import json
@@ -20,10 +21,16 @@ class Listen(StreamListener):
         self.num_tweets = 0
         self.topic=topic
         self.printable = set(string.printable)
-
+        self.start_time=time.time()
+        self.time_limit=45
+    def on_timeout(self):
+        print('timeout occured')
     def on_data(self, a):
         try :
-            if(self.num_tweets  > 0) :
+            self.curr_time=time.time();
+            if(self.curr_time-self.start_time) > self.time_limit:
+                return False
+            if(self.num_tweets  > 50) :
                 return False;
             self.num_tweets=self.num_tweets+1
             a = a.encode('UTF-8')
@@ -31,28 +38,23 @@ class Listen(StreamListener):
             a = a['text'].encode('UTF-8')
             #print(a)
             #a = filter(lambda x: x in self.printable, a)
-            print(a)
 
             with open(self.filename, 'a') as csvfile:
-                spamwriter = csv.writer(csvfile, delimiter=' ', lineterminator='\n')
+                writer = csv.writer(csvfile, delimiter=' ', lineterminator='\n')
                 count = 0
-                spamwriter.writerow([a])
+                writer.writerow([a])
                 count = count + 1
-                '''
-            with open(self.filename, 'a') as write_file:
-                write_file.write(a)
-                write_file.write("\n")
-                '''
+
 
 
         except Exception:
             pass
 
     def on_error(self, b):
-        print(b)
-    def on_timeout(self):
-        print('time out')
-        return True
+        return False
+
+
+
   #  def on_status(self, status):
        # print('full_text:', status.text['full_text'])
 

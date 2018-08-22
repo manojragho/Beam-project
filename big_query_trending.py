@@ -33,5 +33,5 @@ def upload_trending():
     with open('trending.csv', 'rb') as readable:
         big_query_client.load_table_from_file(
             readable, table_ref, job_config=load_config)
-
+    print('trending topics file uploaded to big query')
 
