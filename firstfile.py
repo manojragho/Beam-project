@@ -23,7 +23,7 @@ class Listen(StreamListener):
 
     def on_data(self, a):
         try :
-            if(self.num_tweets  > 4) :
+            if(self.num_tweets  > 0) :
                 return False;
             self.num_tweets=self.num_tweets+1
             a = a.encode('UTF-8')
@@ -50,7 +50,9 @@ class Listen(StreamListener):
 
     def on_error(self, b):
         print(b)
-
+    def on_timeout(self):
+        print('time out')
+        return True
   #  def on_status(self, status):
        # print('full_text:', status.text['full_text'])
 

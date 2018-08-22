@@ -2,10 +2,6 @@
 import apache_beam as beam
 import re
 
-def my_search(line, term):
-   if line.startswith(term):
-      yield line
-
 PROJECT='Beam-wordcount'
 BUCKET='words-count'
 
@@ -20,7 +16,7 @@ def run():
    ]
 
    p = beam.Pipeline(argv=argv)
-   input = 'tweetsfile.csv' #.format(BUCKET)
+   input = 'tweets.csv' #.format(BUCKET)
    output_prefix = 'new.csv'#.format(BUCKET)
    searchTerm = '#'
 
@@ -35,5 +31,3 @@ def run():
 
    p.run()
 
-if __name__ == '__main__':
-   run()
