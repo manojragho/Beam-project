@@ -26,9 +26,7 @@ def upload_wordcount():
     load_config.ignore_unknown_values = False
     load_config.max_bad_records = 200
 
-    # Contents of csv_file.csv:
-    #     Name,Age
-    #     Tim,99
+
     with open('new.csv-00000-of-00001', 'rb') as readable:
         big_query_client.load_table_from_file(
             readable, table_ref, job_config=load_config)

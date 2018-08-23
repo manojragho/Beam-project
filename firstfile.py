@@ -55,8 +55,6 @@ class Listen(StreamListener):
 
 
 
-  #  def on_status(self, status):
-       # print('full_text:', status.text['full_text'])
 
 
 if __name__=="__main__":

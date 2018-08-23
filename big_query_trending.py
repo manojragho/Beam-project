@@ -27,9 +27,7 @@ def upload_trending():
     load_config.ignore_unknown_values = False
     load_config.max_bad_records = 200
 
-    # Contents of csv_file.csv:
-    #     Name,Age
-    #     Tim,99
+
     with open('trending.csv', 'rb') as readable:
         big_query_client.load_table_from_file(
             readable, table_ref, job_config=load_config)
