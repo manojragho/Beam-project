@@ -4,7 +4,7 @@ import Example as eg
 import big_query_trending as trends
 import big_query_tweets_file as tweets
 import big_query_count_file as tweetcount
-
+import big_tweet_topic as tp
 
 
 
@@ -18,6 +18,7 @@ def main():
     trends.upload_trending()
     tweets.upload_tweets()
     tweetcount.upload_wordcount()
+    tp.upload_tweets_and_topics()
 
 
 if __name__ == '__main__':

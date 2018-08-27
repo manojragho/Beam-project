@@ -6,19 +6,19 @@ from google.cloud.bigquery import LoadJobConfig
 from google.cloud.bigquery import SchemaField
 
 
-def upload_tweets():
+def upload_tweets_and_topics():
     big_query_client = bigquery.Client.from_service_account_json('my-beam-project-b2834963a4ae.json')
 
-    dataset_ref = big_query_client.dataset('Tweets')
+    dataset_ref = big_query_client.dataset('Tweetstopic')
     dataset = Dataset(dataset_ref)
-    dataset.description = 'This represents tweets of trending topics'
+    dataset.description = 'This represents tweets of tweets and topics'
     dataset = big_query_client.create_dataset(dataset)
 
     SCHEMA = [
-        SchemaField('Tweets', 'STRING', mode='Nullable'),
+        SchemaField('Tweettopic', 'STRING', mode='Nullable'),
 
     ]
-    table_ref = big_query_client.dataset('Tweets').table('tabletweet')
+    table_ref = big_query_client.dataset('Tweetstopic').table('tablett')
 
     load_config = LoadJobConfig()
     load_config.skip_leading_rows = 0
@@ -28,7 +28,9 @@ def upload_tweets():
     load_config.max_bad_records = 200
 
 
-    with open('tweets.csv', 'rb') as readable:
+    with open('tweet_topic.csv', 'rb') as readable:
         big_query_client.load_table_from_file(
             readable, table_ref, job_config=load_config)
-    print('tweets file uploaded to big query')
+    print('tweets-topic file uploaded to big query')
+
+

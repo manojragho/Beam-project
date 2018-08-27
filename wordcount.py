@@ -31,20 +31,27 @@ def get_trending():
 
 
 def get_tweets():
+     print('seraching for tweets')
      b=[]
      with open('trending.csv','r') as  csvfile:
           reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
           for row in reader:
-               b.append(''.join(row))
+               try :
+                    b.append(''.join(row).encode('UTF-8'))
+               except :Exception
      count=0
+     print(b)
+
      a_Listen = Listen("tweets.csv", "")
      authenticate = OAuthHandler(Credentials.Consumer_Key, Credentials.Consumer_Secret)
      authenticate.set_access_token(Credentials.Access_Token, Credentials.Access_Token_Secret)
      streamer = Stream(authenticate, a_Listen)
      tweets = streamer.filter(track=b, languages=["en"])
-'''
+
+
+     '''
      for word in b:
-          a_Listen = Listen("tweets.csv", "")
+          a_Listen = Listen("tweets.csv", word)
           authenticate = OAuthHandler(Credentials.Consumer_Key, Credentials.Consumer_Secret)
           authenticate.set_access_token(Credentials.Access_Token, Credentials.Access_Token_Secret)
           streamer = Stream(authenticate, a_Listen)
@@ -53,7 +60,8 @@ def get_tweets():
           count=count+1
           if count > 10:
                break
-               '''
+     '''
+
 
 
 
